@@ -6,6 +6,15 @@ set_property(GLOBAL PROPERTY USE_FOLDERS YES)
 # Generate compile_commands.json for LSP/clangd support
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+# Create symlink to compile_commands.json in project root for IDE support
+if(CMAKE_EXPORT_COMPILE_COMMANDS)
+    execute_process(
+        COMMAND ${CMAKE_COMMAND} -E create_symlink
+            ${CMAKE_BINARY_DIR}/compile_commands.json
+            ${CMAKE_SOURCE_DIR}/compile_commands.json
+    )
+endif()
+
 # Creates a /Modules directory in the IDE with the JUCE Module code
 option(JUCE_ENABLE_MODULE_SOURCE_GROUPS "Show all module sources in IDE projects" ON)
 
