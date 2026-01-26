@@ -18,3 +18,7 @@ endif ()
 # C++23, please
 # Use cxx_std_23 for C++23 (as of CMake v 3.20)
 target_compile_features(SharedCode INTERFACE cxx_std_23)
+
+# Strict compile flags for high code quality
+include(SqueakyClean)
+target_enable_squeaky_clean(SharedCode INTERFACE)

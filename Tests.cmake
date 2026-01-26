@@ -31,6 +31,10 @@ CPMAddPackage("gh:catchorg/Catch2@3.8.1")
 add_executable(Tests ${TestFiles})
 target_compile_features(Tests PRIVATE cxx_std_20)
 
+# Strict compile flags for high code quality
+include(SqueakyClean)
+target_enable_squeaky_clean(Tests PRIVATE)
+
 # Our test executable also wants to know about our plugin code...
 target_include_directories(Tests PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/source)
 

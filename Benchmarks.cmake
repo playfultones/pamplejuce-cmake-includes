@@ -5,6 +5,10 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/benchmarks PREFIX "" FILES ${Bench
 
 add_executable(Benchmarks ${BenchmarkFiles})
 target_compile_features(Benchmarks PRIVATE cxx_std_20)
+
+# Strict compile flags for high code quality
+include(SqueakyClean)
+target_enable_squeaky_clean(Benchmarks PRIVATE)
 catch_discover_tests(Benchmarks)
 
 # Our benchmark executable also wants to know about our plugin code...
