@@ -68,4 +68,14 @@ include(${Catch2_SOURCE_DIR}/extras/Catch.cmake)
 
 # ${DISCOVERY_MODE} set to "PRE_TEST" for MacOS arm64 / Xcode development
 # fixes error when Xcode attempts to run test executable
-catch_discover_tests(Tests ${DISCOVERY_MODE} "PRE_TEST")
+#
+# CATCH_TEST_SPEC can be set before include(Tests) to exclude tags from the
+# default CTest run. If not set, all tests are discovered.
+if (DEFINED CATCH_TEST_SPEC)
+    catch_discover_tests(Tests
+        ${DISCOVERY_MODE} "PRE_TEST"
+        TEST_SPEC "${CATCH_TEST_SPEC}"
+    )
+else()
+    catch_discover_tests(Tests ${DISCOVERY_MODE} "PRE_TEST")
+endif()
